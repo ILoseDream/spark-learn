@@ -37,7 +37,7 @@ public class WordCountLocal {
     // RDD 有元素的概念 如果是 hdfs 或者本地文件 创建的 RDD 每一个元素相当于文件里的一行
     JavaRDD<String> javaRDD =
         sparkContext.textFile(
-            "/Users/losedream/learn/java_code/spark/spark-learn/spark-learn/spark.txt");
+            "/Users/losedream/learn/java_code/spark/spark-learn/spark-learn/core/spark.txt");
 
     // 4 针对 初始的 RDD 进行 transformation 操作 也就是一些计算操作
     // 通常操作会通过创建function，并配合RDD的map、flatMap等算子来执行
@@ -79,13 +79,7 @@ public class WordCountLocal {
     // 最后返回的JavaPairRDD中的元素，也是tuple，但是第一个值就是每个key，第二个值就是key的value
     // reduce之后的结果，相当于就是每个单词出现的次数
     JavaPairRDD<String, Integer> reduceRDD =
-        pairRDD.reduceByKey(
-            new Function2<Integer, Integer, Integer>() {
-              @Override
-              public Integer call(Integer v1, Integer v2) throws Exception {
-                return v1 + v2;
-              }
-            });
+        pairRDD.reduceByKey(Integer::sum);
 
     // 到这里为止 我们通过 spark 算子操作 以及统计处单词的次数
     // 一个 spark 应用中 光是 transformation 操作  是不行的 是不会执行的 必须要有一种叫做 action
@@ -93,7 +87,7 @@ public class WordCountLocal {
         new VoidFunction<Tuple2<String, Integer>>() {
           @Override
           public void call(Tuple2<String, Integer> tuple2) throws Exception {
-            System.out.println(tuple2._1 + "" + " append " + tuple2._2 + "times.");
+            System.out.println(tuple2._1 + "" + " append " + tuple2._2 + " times.");
           }
         });
     sparkContext.close();

@@ -26,25 +26,25 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-core_2.10</artifactId>
-      <version>1.3.0</version>
+      <version>1.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-sql_2.10</artifactId>
-      <version>1.3.0</version>
+      <version>1.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-hive_2.10</artifactId>
-      <version>1.3.0</version>
+      <version>1.5.1</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-streaming_2.10</artifactId>
-      <version>1.3.0</version>
+      <version>1.5.1</version>
     </dependency>
 
     <dependency>
@@ -56,8 +56,23 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-streaming-kafka_2.10</artifactId>
-      <version>1.3.0</version>
+      <version>1.5.1</version>
     </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.6</version>
+    </dependency>
+
+    <!--  解决 M1 报错问题 https://blog.csdn.net/zhaochengxuyuan1/article/details/125738748 -->
+    <dependency>
+      <groupId>org.xerial.snappy</groupId>
+      <artifactId>snappy-java</artifactId>
+      <version>1.1.8.4</version>
+      <scope>compile</scope>
+    </dependency>
+
   </dependencies>
 
   <build>
