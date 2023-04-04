@@ -15,7 +15,7 @@ public class SqlDTO {
 
   private String file;
 
-  private String timesmatp;
+  private String timestamp;
 
   private String time;
 
@@ -29,7 +29,6 @@ public class SqlDTO {
 
   private JSONObject data;
 
-  private
 
 
 
