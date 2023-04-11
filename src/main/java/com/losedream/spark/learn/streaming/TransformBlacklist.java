@@ -59,46 +59,46 @@ public class TransformBlacklist {
 
     // 然后，就可以执行transform操作了，将每个batch的RDD，
     // 与黑名单RDD进行join、filter、map等操作实时进行黑名单过滤
-    JavaDStream<String> validAdsClickLogDStream = userAdsClickLogDStream.transform(
-        new Function<JavaPairRDD<String, String>, JavaRDD<String>>() {
-          @Override
-          public JavaRDD<String> call(JavaPairRDD<String, String> userAdsClickLogRDD)
-              throws Exception {
+//    JavaDStream<String> validAdsClickLogDStream = userAdsClickLogDStream.transform(
+//        new Function<JavaPairRDD<String, String>, JavaRDD<String>>() {
+//          @Override
+//          public JavaRDD<String> call(JavaPairRDD<String, String> userAdsClickLogRDD)
+//              throws Exception {
             // 这里为什么用左外连接？
             // 因为，并不是每个用户都存在于黑名单中的
             // 所以，如果直接用join，那么没有存在于黑名单中的数据，会无法join到
             // 就给丢弃掉了
             // 所以，这里用leftOuterJoin，就是说，哪怕一个user不在黑名单RDD中，没有join到
             // 也还是会被保存下来的
-            JavaPairRDD<String, Tuple2<String, Optional<Boolean>>> joinedRDD =
-                userAdsClickLogRDD.leftOuterJoin(blacklistRDD);
+//            JavaPairRDD<String, Tuple2<String, Optional<Boolean>>> joinedRDD =
+//                userAdsClickLogRDD.leftOuterJoin(blacklistRDD);
 
             // 连接之后，执行filter算子
-            JavaPairRDD<String, Tuple2<String, Optional<Boolean>>> filteredRDD = joinedRDD.filter(
-                new Function<Tuple2<String, Tuple2<String, Optional<Boolean>>>, Boolean>() {
-                  @Override
-                  public Boolean call(Tuple2<String, Tuple2<String, Optional<Boolean>>> tuple2)
-                      throws Exception {
-                    return !tuple2._2._2.isPresent() || !tuple2._2._2.get();
-                  }
-                });
+//            JavaPairRDD<String, Tuple2<String, Optional<Boolean>>> filteredRDD = joinedRDD.filter(
+//                new Function<Tuple2<String, Tuple2<String, Optional<Boolean>>>, Boolean>() {
+//                  @Override
+//                  public Boolean call(Tuple2<String, Tuple2<String, Optional<Boolean>>> tuple2)
+//                      throws Exception {
+//                    return !tuple2._2._2.isPresent() || !tuple2._2._2.get();
+//                  }
+//                });
 
             // 此时，filteredRDD中，就只剩下没有被黑名单过滤的用户点击了
             // 进行map操作，转换成我们想要的格式
-            return filteredRDD.map(
-                new Function<Tuple2<String, Tuple2<String, Optional<Boolean>>>, String>() {
-                  @Override
-                  public String call(Tuple2<String, Tuple2<String, Optional<Boolean>>> v1) {
-                    return v1._2._1;
-                  }
-                });
-          }
-        });
+//            return filteredRDD.map(
+//                new Function<Tuple2<String, Tuple2<String, Optional<Boolean>>>, String>() {
+//                  @Override
+//                  public String call(Tuple2<String, Tuple2<String, Optional<Boolean>>> v1) {
+//                    return v1._2._1;
+//                  }
+//                });
+//          }
+//        });
 
     // 打印有效的广告点击日志
     // 其实在真实企业场景中，这里后面就可以走写入kafka、ActiveMQ等这种中间件消息队列
     // 然后再开发一个专门的后台服务，作为广告计费服务，执行实时的广告计费，这里就是只拿到了有效的广告点击
-    validAdsClickLogDStream.print();
+//    validAdsClickLogDStream.print();
 
     streamingContext.start();
     streamingContext.awaitTermination();
