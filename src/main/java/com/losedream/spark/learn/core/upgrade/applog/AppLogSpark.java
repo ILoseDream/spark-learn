@@ -28,7 +28,7 @@ public class AppLogSpark {
     // 使用SparkContext的textFile()方法，即可读取本地磁盘文件，或者是HDFS上的文件
     // 创建出来一个初始的RDD，其中包含了日志文件中的所有数据
     JavaRDD<String> accessLogRDD = sparkContext.textFile(
-        "C://Users//Administrator//Desktop//access.log");
+        "/Users/losedream/learn/java_code/spark/spark-learn/spark-learn/logs/access.log");
 
     // 将RDD映射为key-value格式，为后面的reduceByKey聚合做准备
     JavaPairRDD<String, AccessLogInfo> accessLogPairRDD =

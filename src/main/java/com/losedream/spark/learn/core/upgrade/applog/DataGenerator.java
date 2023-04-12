@@ -23,7 +23,7 @@ public class DataGenerator {
     Random random = new Random();
 
     // 生成100个deviceID
-    List<String> deviceIDs = IntStream.of(100)
+    List<String> deviceIDs = IntStream.range(0, 100)
         .mapToObj(value -> DataGenerator.getRandomUUID())
         .collect(Collectors.toList());
 
@@ -50,7 +50,7 @@ public class DataGenerator {
     }
 
     try (PrintWriter pw = new PrintWriter(new OutputStreamWriter(
-        Files.newOutputStream(Paths.get("C:\\Users\\Administrator\\Desktop\\access.log"))))) {
+        Files.newOutputStream(Paths.get("/Users/losedream/learn/java_code/spark/spark-learn/spark-learn/logs/access.log"))))) {
       pw.write(buffer.toString());
     } catch (Exception e) {
       e.printStackTrace();

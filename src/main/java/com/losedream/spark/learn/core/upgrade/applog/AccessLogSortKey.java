@@ -143,4 +143,13 @@ public class AccessLogSortKey implements Ordered<AccessLogSortKey>, Serializable
     }
     return 0;
   }
+
+  @Override
+  public String toString() {
+    return "AccessLogSortKey{" +
+        "upTraffic=" + upTraffic +
+        ", downTraffic=" + downTraffic +
+        ", timestamp=" + timestamp +
+        '}';
+  }
 }
