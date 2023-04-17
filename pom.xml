@@ -79,6 +79,12 @@
       <version>2.0.17.graal</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-flume_2.10</artifactId>
+      <version>1.5.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
